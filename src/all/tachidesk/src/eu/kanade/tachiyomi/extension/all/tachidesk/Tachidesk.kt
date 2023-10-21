@@ -51,6 +51,7 @@ class Tachidesk : ConfigurableSource, UnmeteredSource, HttpSource() {
     override val client: OkHttpClient =
         network.client.newBuilder()
             .dns(Dns.SYSTEM) // don't use DNS over HTTPS as it breaks IP addressing
+            .callTimeout(120, java.util.concurrent.TimeUnit.SECONDS)
             .build()
 
     override fun headersBuilder(): Headers.Builder = Headers.Builder().apply {
